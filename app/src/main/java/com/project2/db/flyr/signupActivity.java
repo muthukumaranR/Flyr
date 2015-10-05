@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 /**
- * Created by karthick on 04/10/2015.
+ * Created by muthukumaranR on 04/10/2015.
  */
 public class signupActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
