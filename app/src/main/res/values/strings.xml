@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Flyr</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="username" />
+    <string name="password"> </string>
+    <string name="susername"></string>
+    <string name="spassword"></string>
+    <string name="spassword2"></string>
+</resources>
