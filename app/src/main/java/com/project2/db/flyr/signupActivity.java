@@ -27,7 +27,7 @@ public class signupActivity extends Activity {
             if (password1.equals(password2)) {
                 password = password1;
             }
-
+ //iiii
 
 //iiiim
             Intent i = new Intent(signupActivity.this, LandingActivity.class);
