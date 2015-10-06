@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 /**
- * Created by karthick on 04/10/2015.
+ * Created by muthukumaran on 04/10/2015.
  */
 public class LandingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
