@@ -12,6 +12,7 @@
     android:useDefaultMargins="true"
     android:transitionGroup="true"
     android:columnCount="10"
+
     android:rowCount="20"
     android:orientation="vertical"
     >
