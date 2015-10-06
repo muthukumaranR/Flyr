@@ -7,17 +7,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by karthick on 06/10/2015.
  */
-public class dbhelper extends SQLiteOpenHelper{
+public class usersdbhelper extends SQLiteOpenHelper{
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "airline.db";
+    public static final String DATABASE_NAME = "users.db";
+    public static final String TABLE_NAME = "users";
     public static final String USERNAME = "airline.db";
     public static final String PASSWORD = "airline.db";
     SQLiteDatabase db;
     //public static final String DATABASE_NAME = "airline.db";
-    public static final String TABLE_CREATE = "create table users (id integer primary key not null auto_increment, " + "username text not null,pass text not null);";
+    public static final String TABLE_CREATE = "create table users (id integer primary key not null auto_increment, " + USERNAME +"text not null,pass text not null);";
 
-    public dbhelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public usersdbhelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -29,6 +30,7 @@ public class dbhelper extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        String query  = "DROP TABLE IF EXISTS "+ TABLE_NAME;
 
     }
 }
