@@ -13,6 +13,7 @@
     android:transitionGroup="true"
     android:columnCount="10"
     android:alpha="0.9"
+
     android:rowCount="20"
     android:orientation="vertical"
     >
