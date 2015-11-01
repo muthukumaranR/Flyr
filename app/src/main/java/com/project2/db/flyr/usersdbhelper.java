@@ -23,7 +23,7 @@ public class usersdbhelper extends SQLiteOpenHelper{
     //public static final String DATABASE_NAME = "airline.db";
     public static final String TABLE_CREATE = "create table users (id integer primary key not null , uname text not null,pass text not null);";
     public static final String flight_TABLE_CREATE ="create table flight(f_id primary key not null, maxseats integer not null,origin text,dest text,eco_fare,biz_fare,0);";
-    public static final String port_TABLE_CREATE ="";
+    public static final String port_TABLE_CREATE =" ";
     public static final String booking_TABLE_CREATE ="";
 
     public usersdbhelper(Context context) {
