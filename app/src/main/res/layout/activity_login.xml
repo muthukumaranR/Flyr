@@ -1,10 +1,10 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".LoginActivity"
-    android:background="@drawable/fly_image"
+    android:background="@drawable/flight"
     android:id="@+id/rl1"
     android:animateLayoutChanges="true"
     android:animationCache="true"
@@ -18,16 +18,21 @@
     >
 
     <TextView
-        android:layout_width="274dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Username"
         android:id="@+id/usernameText"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:textColor="#ffffff"
-        android:layout_row="7"
-        android:layout_column="8" />
+        android:layout_column="8"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:textColorHighlight="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textColorLink="#ffffff"
+        android:layout_gravity="left"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="fill_parent"
@@ -36,39 +41,41 @@
         android:text="Name"
         android:ems="10"
         android:id="@+id/username"
-        android:layout_below="@+id/usernameText"
-        android:layout_alignStart="@+id/usernameText"
         android:onClick="ontvclick"
-        android:layout_alignParentEnd="true"
         android:shadowColor="@android:color/background_dark"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
         android:textColorHint="#ffffff"
         android:textColorLink="#ffffff"
         android:layout_row="8"
-        android:layout_column="0" />
+        android:layout_column="0"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/usernameText"
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:layout_width="210dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Password"
         android:id="@+id/passwordText"
-        android:layout_below="@+id/username"
-        android:layout_alignParentStart="true"
         android:textColor="#ffffff"
         android:layout_row="11"
-        android:layout_column="0" />
+        android:layout_column="0"
+        android:textColorHighlight="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textColorLink="#ffffff"
+        android:layout_marginTop="61dp"
+        android:layout_below="@+id/username"
+        android:layout_alignEnd="@+id/password"
+        android:layout_alignStart="@+id/usernameText" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
-        android:layout_below="@+id/passwordText"
-        android:layout_alignStart="@+id/passwordText"
-        android:layout_alignParentEnd="true"
         android:textColor="#ffffff"
         android:textColorLink="#ffffff"
         android:textColorHint="#ffffff"
@@ -76,7 +83,8 @@
         android:textAllCaps="false"
         android:layout_row="14"
         android:layout_column="0"
-        android:alpha="0.5"/>
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -84,12 +92,10 @@
         android:text="LOGIN"
         android:id="@+id/Lbutton"
         android:onClick="onButtonClick"
-        android:layout_marginBottom="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/password"
-        android:layout_row="16"
         android:layout_column="0"
-       />
+        android:layout_marginTop="108dp"
+        android:layout_below="@+id/password"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -97,11 +103,11 @@
         android:text="SIGNUP"
         android:id="@+id/Sbutton"
         android:onClick="onButtonClick"
-        android:layout_alignTop="@+id/Lbutton"
-        android:layout_alignEnd="@+id/password"
         android:layout_row="17"
         android:layout_column="0"
-        android:layout_gravity="bottom|right" />
+        android:layout_gravity="bottom|right"
+        android:layout_alignTop="@+id/Lbutton"
+        android:layout_alignEnd="@+id/password" />
 
 
-</TableLayout>
+</RelativeLayout>

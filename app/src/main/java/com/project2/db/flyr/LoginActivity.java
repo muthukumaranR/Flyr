@@ -7,9 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.Objects;
 
 public class LoginActivity extends Activity {
     int flag = 0;
+    usersdbhelper udb = new usersdbhelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +45,22 @@ public class LoginActivity extends Activity {
         if(v.getId() == R.id.Lbutton){
             EditText un = (EditText)findViewById(R.id.username);
             String username =un.getText().toString();
-            Intent i = new Intent(LoginActivity.this,LandingActivity.class);
-            i.putExtra("username",username);
-            startActivity(i);
+            EditText pw = (EditText)findViewById(R.id.password);
+            String password =pw.getText().toString();
+
+            if (Objects.equals(password, udb.userpass(username))){
+                //auth succ
+                Intent i = new Intent(LoginActivity.this,LandingActivity.class);
+                i.putExtra("username",username);
+                startActivity(i);
+            }
+            else {
+                //failure
+
+                Toast.makeText(LoginActivity.this, "auth fail", Toast.LENGTH_SHORT).show();
+            }
+
+
 
         }
         if(v.getId() == R.id.Sbutton){
