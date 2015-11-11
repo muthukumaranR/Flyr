@@ -14,6 +14,7 @@ import java.util.Objects;
 public class LoginActivity extends Activity {
     int flag = 0;
     usersdbhelper udb = new usersdbhelper(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,7 @@ public class LoginActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
     public void onButtonClick(View v){
+
         if(v.getId() == R.id.Lbutton){
             EditText un = (EditText)findViewById(R.id.username);
             String username =un.getText().toString();
@@ -59,9 +61,6 @@ public class LoginActivity extends Activity {
 
                 Toast.makeText(LoginActivity.this, "auth fail", Toast.LENGTH_SHORT).show();
             }
-
-
-
         }
         if(v.getId() == R.id.Sbutton){
             Intent i = new Intent(LoginActivity.this,signupActivity.class);
@@ -69,6 +68,27 @@ public class LoginActivity extends Activity {
         }
 
     }
+    public void onAdminclick(View v) {
+        admindbhelper adb = new admindbhelper(this);
+        EditText aidtext = (EditText)findViewById(R.id.username);
+        String aid =aidtext.getText().toString();
+        EditText pwdtext = (EditText)findViewById(R.id.password);
+        String password =pwdtext.getText().toString();
+        if (Objects.equals(password, adb.passretreive(aid))){
+            //auth succ
+            Intent i = new Intent(LoginActivity.this,AdminActivity.class);
+            i.putExtra("adminId",aid);
+            Toast.makeText(LoginActivity.this, "admin enter", Toast.LENGTH_SHORT).show();
+           startActivity(i);
+        }
+        else {
+            //failure
+
+            Toast.makeText(LoginActivity.this, "admin only", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
     public void ontvclick(View v) {
         if ((v.getId() == R.id.username)&& flag == 0){
             flag = 1;

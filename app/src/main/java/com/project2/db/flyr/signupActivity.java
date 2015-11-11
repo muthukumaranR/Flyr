@@ -39,7 +39,6 @@ public class signupActivity extends Activity {
                 u.setpassword(password);
                 u.setusername(username);
                 udb.insertUser(u);
-
                 Intent i = new Intent(signupActivity.this, LandingActivity.class);
                 i.putExtra("username1", username);
                 i.putExtra("password", password);

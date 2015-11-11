@@ -14,17 +14,20 @@ import static android.database.sqlite.SQLiteOpenHelper.*;
 public class usersdbhelper extends SQLiteOpenHelper{
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "users.db";
+    public static final String DATABASE_NAME = "flyr.db";
     public static final String TABLE_NAME = "users";
+    public static final String flight_TABLE_NAME = "flight";
     public static final String USERNAME = "uname";
     public static final String PASSWORD = "pass" ;
+
     public static final String ID = "id";
     SQLiteDatabase db;
     //public static final String DATABASE_NAME = "airline.db";
     public static final String TABLE_CREATE = "create table users (id integer primary key not null , uname text not null,pass text not null);";
-    public static final String flight_TABLE_CREATE ="create table flight(f_id primary key not null, maxseats integer not null,origin text,dest text,eco_fare,biz_fare,0);";
+    public static final String flight_TABLE_CREATE ="create table flight (f_id primary key not null, fname text not null,maxseats integer not null,origin text,dest text,fare integer,Start integer,end integer);";
     public static final String port_TABLE_CREATE =" ";
     public static final String booking_TABLE_CREATE ="";
+    public static final String admin_TABLE_CREATE ="create table admin (aid integer primary key not null ,pass text not null);";
 
     public usersdbhelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,6 +36,8 @@ public class usersdbhelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_CREATE);
+        db.execSQL(flight_TABLE_CREATE);
+       // db.execSQL(flight_TABLE_CREATE);
     this.db = db;
     }
     public void insertUser(users u){
@@ -49,7 +54,43 @@ public class usersdbhelper extends SQLiteOpenHelper{
         db.insert(TABLE_NAME, null, cv);
         db.close();
     }
+    public void insertFlight(flight f){
+        db = this.getWritableDatabase();
+        String qry = "select * from "+flight_TABLE_NAME;
+        Cursor cr = db.rawQuery(qry,null);
 
+        String a = f.getFid(),b;
+        int insert=0;
+        if(cr.getCount() != 0 ) {
+            cr.moveToFirst();
+            do {
+                b = cr.getString(0);
+                if (a.equals(b)) {
+                    //update
+                    insert = 1;
+                }
+
+            } while (cr.moveToNext());
+        }
+        //cr.close();
+            if(cr.getCount()==0 || insert != 1){
+                ContentValues cv = new ContentValues();
+                //insert
+                cv.put("f_id",f.getFid());
+                cv.put("fname",f.getFname());
+                cv.put("origin",f.getOrigin());
+                cv.put("dest", f.getDest());
+                cv.put("maxseats", f.getMaxseats());
+                cv.put("fare", f.getFare());
+                cv.put("start",f.getStart());
+                cv.put("end", f.getEnd());
+
+                db.insert(flight_TABLE_NAME, null, cv);
+                cr.close();
+                db.close();
+            }
+
+    }
     public String userpass(String username){
         db = this.getReadableDatabase();
         String qry = "select * from "+TABLE_NAME;
@@ -75,6 +116,7 @@ public class usersdbhelper extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String query  = "DROP TABLE IF EXISTS "+ TABLE_NAME;
+       // String query2  = "DROP TABLE IF EXISTS "+ flight_TABLE_NAME ;
 
     }
 }

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="             Admin Page : Insert or update flight details"
+        android:id="@+id/textView13"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="225dp"
+        android:layout_height="161dp"
+        android:id="@+id/Aid"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/fly_image" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView"
+        android:fillViewport="false" >
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="435dp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text=" Flight ID"
+            android:id="@+id/textView5"
+            android:layout_marginLeft="0dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="75dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fid"
+            android:layout_marginLeft="0dp"
+            android:layout_below="@+id/textView5"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text=" Flight Name"
+            android:id="@+id/textView6"
+            android:layout_marginLeft="0dp"
+            android:layout_below="@+id/fid"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fname"
+            android:layout_marginLeft="0dp"
+            android:layout_below="@+id/textView6"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text=" maxseats"
+            android:id="@+id/textView7"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/fname"
+            android:layout_alignParentLeft="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/maxseats"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/textView7"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text=" origin"
+            android:id="@+id/textView8"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/maxseats"
+            android:layout_alignParentLeft="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/origin"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/textView8"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text=" dest"
+            android:id="@+id/textView9"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/origin"
+            android:layout_alignParentLeft="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dest"
+            android:layout_below="@+id/textView9"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" fare"
+            android:id="@+id/textView10"
+            android:layout_below="@+id/dest"
+           />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fare"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/textView10"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="takeoff"
+            android:id="@+id/textView11"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/fare"
+            android:layout_alignParentLeft="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/start"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:inputType="time"
+                android:layout_below="@+id/textView11"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text=" land"
+            android:id="@+id/textView12"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/start"
+                android:layout_alignParentLeft="true" />
+
+            <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/end"
+                android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+                android:layout_below="@+id/textView12"
+                android:layout_alignParentLeft="true" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SUBMIT"
+                android:id="@+id/button2"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignBottom="@+id/fid"
+                android:layout_centerHorizontal="true"
+                android:onClick="onadminClick" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

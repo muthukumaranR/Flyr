@@ -6,6 +6,7 @@
     <string name="username" />
     <string name="password"> </string>
     <string name="susername"></string>
+    <string name="clear">clear</string>
     <string name="spassword"></string>
     <string name="spassword2"></string>
 </resources>

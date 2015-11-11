@@ -8,7 +8,7 @@ import android.widget.TextView;
 /**
  * Created by muthukumaran on 04/10/2015.
  */
-public class LandingActivity extends ListActivity {
+public class LandingActivity extends Activity {
     int no_uniq;//unique bookings of the user,to inflate and populate the lists
 
     protected void onCreate(Bundle savedInstanceState) {
