@@ -17,12 +17,14 @@ public class usersdbhelper extends SQLiteOpenHelper{
     public static final String DATABASE_NAME = "flyr.db";
     public static final String TABLE_NAME = "users";
     public static final String flight_TABLE_NAME = "flight";
+    public static final String booking_TABLE_NAME = "bookings";//bid,date,uid,pid,f_id,,
+    public static final String pass_TABLE_NAME = "passengers";//pid,bid,pname,seat,checkin;
+    //public static final String _TABLE_NAME = "passengers";
     public static final String USERNAME = "uname";
     public static final String PASSWORD = "pass" ;
 
     public static final String ID = "id";
     SQLiteDatabase db;
-    //public static final String DATABASE_NAME = "airline.db";
     public static final String TABLE_CREATE = "create table users (id integer primary key not null , uname text not null,pass text not null);";
     public static final String flight_TABLE_CREATE ="create table flight (f_id primary key not null, fname text not null,maxseats integer not null,origin text,dest text,fare integer,Start integer,end integer);";
     public static final String port_TABLE_CREATE =" ";
@@ -58,38 +60,39 @@ public class usersdbhelper extends SQLiteOpenHelper{
         db = this.getWritableDatabase();
         String qry = "select * from "+flight_TABLE_NAME;
         Cursor cr = db.rawQuery(qry,null);
+        ContentValues cv = new ContentValues();
 
+        cv.put("f_id",f.getFid());
+        cv.put("fname",f.getFname());
+        cv.put("origin",f.getOrigin());
+        cv.put("dest", f.getDest());
+        cv.put("maxseats", f.getMaxseats());
+        cv.put("fare", f.getFare());
+        cv.put("start",f.getStart());
+        cv.put("end", f.getEnd());
         String a = f.getFid(),b;
-        int insert=0;
+        int update=0;
         if(cr.getCount() != 0 ) {
             cr.moveToFirst();
             do {
                 b = cr.getString(0);
                 if (a.equals(b)) {
-                    //update
-                    insert = 1;
+                    String where = "f_id="+b;
+                    //update public int update (String table, ContentValues values, String whereClause, String[] whereArgs)
+                   db.update(flight_TABLE_NAME, cv, where, null);
+
+                    update = 1;
                 }
 
             } while (cr.moveToNext());
         }
         //cr.close();
-            if(cr.getCount()==0 || insert != 1){
-                ContentValues cv = new ContentValues();
-                //insert
-                cv.put("f_id",f.getFid());
-                cv.put("fname",f.getFname());
-                cv.put("origin",f.getOrigin());
-                cv.put("dest", f.getDest());
-                cv.put("maxseats", f.getMaxseats());
-                cv.put("fare", f.getFare());
-                cv.put("start",f.getStart());
-                cv.put("end", f.getEnd());
-
+            if(cr.getCount()==0 || update != 1){
                 db.insert(flight_TABLE_NAME, null, cv);
-                cr.close();
-                db.close();
-            }
 
+            }
+        cr.close();
+        db.close();
     }
     public String userpass(String username){
         db = this.getReadableDatabase();
