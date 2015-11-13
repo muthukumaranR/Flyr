@@ -77,7 +77,7 @@ public class usersdbhelper extends SQLiteOpenHelper{
             do {
                 b = cr.getString(0);
                 if (a.equals(b)) {
-                    String where = "f_id="+b;
+                    String where = "f_id = '"+b+"'";
                     //update public int update (String table, ContentValues values, String whereClause, String[] whereArgs)
                    db.update(flight_TABLE_NAME, cv, where, null);
 
