@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/StartCity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:onClick="showDatePickerDialog"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="From" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editText"
+        android:text="To" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/to" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editText2"
+        android:text="Date" />
+
+    <Button
+        android:id="@+id/dateButton"
+        android:layout_width="400dp"
+
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+
+        android:layout_below="@+id/date"
+        android:background="#ADD8E6"
+        android:onClick="showDatePickerDialog"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/searchFlights"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="400dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/dateButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="94dp"
+        android:background="#ADD8E6"
+        android:text="Search Flights"
+        android:textSize="30sp" />
+
+
+</RelativeLayout>
