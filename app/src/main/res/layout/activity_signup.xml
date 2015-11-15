@@ -1,83 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/flight">
+    android:layout_width="match_parent" android:layout_height="match_parent">
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SIGN UP"
         android:id="@+id/Sbutton"
-        android:onClick="onButtonClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:onClick="onButtonClick"
+        android:text="SIGN UP" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Username"
         android:id="@+id/usernameText"
-        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Username"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff" />
 
     <EditText
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/username"
-        android:layout_below="@+id/usernameText"
-        android:layout_alignStart="@+id/usernameText"
         android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/usernameText"
+        android:layout_below="@+id/usernameText"
+        android:ems="10"
+        android:inputType="textPersonName"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff" />
 
     <TextView
+        android:id="@+id/passwordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Password"
-        android:id="@+id/passwordText"
-        android:layout_below="@+id/username"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/username"
+        android:text="Password"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff" />
 
     <EditText
+        android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/password"
-        android:layout_below="@+id/passwordText"
-        android:layout_alignStart="@+id/passwordText"
         android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/passwordText"
+        android:layout_below="@+id/passwordText"
+        android:drawableTint="#ffffff"
+        android:ems="10"
+        android:inputType="textPassword"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
-        android:textColorLink="#ffffff"
         android:textColorHint="#ffffff"
-        android:drawableTint="#ffffff" />
+        android:textColorLink="#ffffff" />
     <TextView
+        android:id="@+id/passwordText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Retype Password"
-        android:id="@+id/passwordText2"
-        android:layout_below="@+id/password"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/password"
+        android:text="Retype Password"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff" />
 
     <EditText
+        android:id="@+id/password2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/password2"
-        android:layout_below="@+id/passwordText2"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/passwordText2"
+        android:ems="10"
+        android:inputType="textPassword" />
 
 </RelativeLayout>

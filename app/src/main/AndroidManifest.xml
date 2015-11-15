@@ -19,7 +19,8 @@
 
         <activity android:name=".LandingActivity">
             </activity>
-        <activity android:name=".signupActivity">
+        <activity android:name=".signupActivity"></activity>
+        <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".AdminActivity">
         </activity>

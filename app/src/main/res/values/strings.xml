@@ -9,4 +9,5 @@
     <string name="clear">clear</string>
     <string name="spassword"></string>
     <string name="spassword2"></string>
+    <string name="pick_date">pick_date</string>
 </resources>

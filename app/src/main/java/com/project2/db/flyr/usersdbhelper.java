@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static android.database.sqlite.SQLiteOpenHelper.*;
-
 /**
  * Created by karthick on 06/10/2015.
  */
@@ -24,12 +22,12 @@ public class usersdbhelper extends SQLiteOpenHelper{
     public static final String PASSWORD = "pass" ;
 
     public static final String ID = "id";
-    SQLiteDatabase db;
     public static final String TABLE_CREATE = "create table users (id integer primary key not null , uname text not null,pass text not null);";
     public static final String flight_TABLE_CREATE ="create table flight (f_id primary key not null, fname text not null,maxseats integer not null,origin text,dest text,fare integer,Start integer,end integer);";
     public static final String port_TABLE_CREATE =" ";
-    public static final String booking_TABLE_CREATE ="";
+    public static final String bookings_TABLE_CREATE = "create table bookings(b_id integer primary key not null,f_id integer not null,u_id integer not null,p_id integer not null,bookedDate date not null);";
     public static final String admin_TABLE_CREATE ="create table admin (aid integer primary key not null ,pass text not null);";
+    SQLiteDatabase db;
 
     public usersdbhelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -39,7 +37,7 @@ public class usersdbhelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_CREATE);
         db.execSQL(flight_TABLE_CREATE);
-       // db.execSQL(flight_TABLE_CREATE);
+        db.execSQL(bookings_TABLE_CREATE);
     this.db = db;
     }
     public void insertUser(users u){
@@ -51,10 +49,27 @@ public class usersdbhelper extends SQLiteOpenHelper{
         Cursor cr  =  db.rawQuery(qry,null);
         int count = cr.getCount();
         cv.put(ID,count);
-        cv.put(USERNAME,u.getusername());
+        cv.put(USERNAME, u.getusername());
         cv.put(PASSWORD, u.getpassword());
         db.insert(TABLE_NAME, null, cv);
         db.close();
+    }
+
+    public void insertBooking(bookings b) {
+        String qry = "select * from " + booking_TABLE_NAME;
+        db = this.getWritableDatabase();
+        String s = "'" + b.getD().toString() + "'";
+        Cursor cr = db.rawQuery(qry, null);
+        ContentValues cv = new ContentValues();
+        cv.put("b_id", b.getBid());
+        cv.put("f_id", b.getFid());
+        cv.put("u_id", b.getUid());
+        cv.put("p_id", b.getPid());
+        cv.put("bookedDate", s);
+        db.insert(booking_TABLE_NAME, null, cv);
+        db.close();
+
+
     }
     public void insertFlight(flight f){
         db = this.getWritableDatabase();
