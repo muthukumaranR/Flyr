@@ -152,6 +152,17 @@ public class usersdbhelper extends SQLiteOpenHelper{
    /* public int checkseats(int p1,int p2,String fid){
 
     }*/
+
+    public Cursor getRequiredFlight(String origin, String dest) {
+        db = this.getReadableDatabase();
+        String query = "select f_id as _id,fname,origin,dest,fare from "+flight_TABLE_NAME+" where origin='"+origin+"' and dest='"+dest+"'";
+        Cursor c = 	db.rawQuery(query, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+        return c;
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String query  = "DROP TABLE IF EXISTS "+ TABLE_NAME;

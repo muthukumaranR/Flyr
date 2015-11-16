@@ -148,6 +148,7 @@ public class MainActivity extends Activity implements TabListener, DatePickerFra
         i.putExtra("date",datebtn);
         i.putExtra("pass",pass);
         //shift intent to bookactivity, pass ,dt ,orig,dest,date  to it
+        startActivity(i);
     }
 
 }
