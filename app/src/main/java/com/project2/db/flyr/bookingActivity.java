@@ -11,6 +11,7 @@ import android.widget.SimpleCursorAdapter;
 /**
  * Created by Deepak on 11/15/2015.
  */
+//check
 public class bookingActivity extends Activity {
     private int passw;
     private String orig,dest,date;
