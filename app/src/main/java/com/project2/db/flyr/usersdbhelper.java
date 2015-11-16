@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by karthick on 06/10/2015.
  */
@@ -131,6 +133,25 @@ public class usersdbhelper extends SQLiteOpenHelper{
 
     }
 
+    public ArrayList searchFlights(String start,String end){
+    ArrayList fid= new ArrayList();
+        db = this.getReadableDatabase();
+        String qry = "select * from "+flight_TABLE_CREATE;
+        //do search in db and store in arraylist
+        return fid;
+    }
+    public int checkseats(int p1,String fid){
+    String cQuery = "select * from flight as f,bookings as b where f.f_id = b.f_id and f_fid ='"+fid+"'";
+        Cursor cr = db.rawQuery(cQuery,null);
+        if(cr.moveToFirst()){
+
+        }
+
+    return 0;
+    }
+   /* public int checkseats(int p1,int p2,String fid){
+
+    }*/
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String query  = "DROP TABLE IF EXISTS "+ TABLE_NAME;
