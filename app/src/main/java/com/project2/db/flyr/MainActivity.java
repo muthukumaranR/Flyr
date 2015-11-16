@@ -17,12 +17,9 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -132,6 +129,31 @@ public class MainActivity extends Activity implements TabListener, DatePickerFra
 */
     }
 
+
+//    public void onRadioButtonClicked(View view) {
+//
+//        boolean checked = ((RadioButton) view).isChecked();
+//        switch (view.getId()) {
+//            case R.id.rb1:
+//                if (checked)
+//
+//                    break;
+//            case R.id.rb2:
+//                if (checked)
+//
+//                    break;
+//            case R.id.rb3:
+//                if (checked)
+//                    // Ninjas rule
+//                    break;
+//            case R.id.rb4:
+//                if (checked)
+//                    // Ninjas rule
+//                    break;
+//        }
+//
+//    }
+
     public void onSearchflightclick(View a) {
 
         Intent i = new Intent(MainActivity.this,bookingActivity.class);
@@ -141,12 +163,14 @@ public class MainActivity extends Activity implements TabListener, DatePickerFra
         String dest =desttext.getText().toString();
         Button datebutton = (Button)findViewById(R.id.dateButton);
         String datebtn =datebutton.getText().toString();
-        int pass = 1;
-        //change  pass with radiobutton here
+
+        Spinner dropdown = (Spinner) findViewById(R.id.spinner);
+        String pass = dropdown.getSelectedItem().toString();
         i.putExtra("orig",orig);
         i.putExtra("dest",dest);
         i.putExtra("date",datebtn);
-        i.putExtra("pass",pass);
+        i.putExtra("pass", pass);
+        startActivity(i);
         //shift intent to bookactivity, pass ,dt ,orig,dest,date  to it
         startActivity(i);
     }
