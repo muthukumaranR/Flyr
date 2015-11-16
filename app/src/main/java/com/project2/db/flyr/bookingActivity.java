@@ -1,6 +1,7 @@
 package com.project2.db.flyr;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -63,7 +64,11 @@ public class bookingActivity extends Activity {
         bookedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String s ="deepak";
+                Intent i = new Intent(bookingActivity.this, bookActivity.class);
+                String s = ""+id+"";
+                i.putExtra("id", s);
+                startActivity(i);
+
             }
         });
     }

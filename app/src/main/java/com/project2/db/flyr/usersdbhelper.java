@@ -163,6 +163,17 @@ public class usersdbhelper extends SQLiteOpenHelper{
         return c;
     }
 
+    // Get a specific row (by rowId)
+    public Cursor getFlightRow(String id) {
+        db = this.getReadableDatabase();
+        String query = "select fname,origin,dest,fare from "+flight_TABLE_NAME+" where f_id='"+id+"'";
+        Cursor c = 	db.rawQuery(query, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+        return c;
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String query  = "DROP TABLE IF EXISTS "+ TABLE_NAME;
