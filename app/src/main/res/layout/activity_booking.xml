@@ -44,5 +44,6 @@
         android:text="Book"
         android:id="@+id/button4"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.04" />
+        android:layout_weight="0.04"
+        android:onClick="onBookingButtonClick"/>
 </LinearLayout>

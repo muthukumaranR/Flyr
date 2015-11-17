@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by karthick on 06/10/2015.
@@ -18,17 +21,21 @@ public class usersdbhelper extends SQLiteOpenHelper{
     public static final String TABLE_NAME = "users";
     public static final String flight_TABLE_NAME = "flight";
     public static final String booking_TABLE_NAME = "bookings";//bid,date,uid,pid,f_id,,
-    public static final String pass_TABLE_NAME = "passengers";//pid,bid,pname,seat,checkin;
+    public static final String pass_TABLE_NAME = "passenger";//pid,bid,pname,seat,checkin;
+    public static final String seats_TABLE_NAME="seats";
     //public static final String _TABLE_NAME = "passengers";
     public static final String USERNAME = "uname";
     public static final String PASSWORD = "pass" ;
 
     public static final String ID = "id";
     public static final String TABLE_CREATE = "create table users (id integer primary key not null , uname text not null,pass text not null);";
-    public static final String flight_TABLE_CREATE ="create table flight (f_id primary key not null, fname text not null,maxseats integer not null,origin text,dest text,fare integer,Start integer,end integer);";
+    public static final String flight_TABLE_CREATE ="create table flight (f_id text primary key not null, fname text not null,maxseats integer not null,origin text,dest text,fare integer,Start integer,end integer);";
     public static final String port_TABLE_CREATE =" ";
-    public static final String bookings_TABLE_CREATE = "create table bookings(b_id integer primary key not null,f_id integer not null,u_id integer not null,p_id integer not null,bookedDate date not null);";
+    public static final String bookings_TABLE_CREATE = "create table bookings(b_id integer not null,f_id text not null,u_id integer not null,p_id integer not null,bookedDate date not null);";
     public static final String admin_TABLE_CREATE ="create table admin (aid integer primary key not null ,pass text not null);";
+    public static final String passenger_TABLE_CREATE ="create table passenger(p_id integer primary key not null ,pname text not null, b_id integer,seatno integer);";
+    public static final String seats_TABLE_CREATE="create table seats(f_id text not null,fdate date, remseats integer);";
+
     SQLiteDatabase db;
 
     public usersdbhelper(Context context) {
@@ -40,21 +47,76 @@ public class usersdbhelper extends SQLiteOpenHelper{
         db.execSQL(TABLE_CREATE);
         db.execSQL(flight_TABLE_CREATE);
         db.execSQL(bookings_TABLE_CREATE);
-    this.db = db;
+        db.execSQL(passenger_TABLE_CREATE);
+        db.execSQL(seats_TABLE_CREATE);
+        this.db = db;
     }
+
     public void insertUser(users u){
         db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-
-
+        //pid,pname,bid,seats
         String qry = "select * from "+TABLE_NAME;
         Cursor cr  =  db.rawQuery(qry,null);
         int count = cr.getCount();
-        cv.put(ID,count);
+        cv.put(ID, count);
         cv.put(USERNAME, u.getusername());
         cv.put(PASSWORD, u.getpassword());
         db.insert(TABLE_NAME, null, cv);
         db.close();
+    }
+
+    public void insertPassenger(passenger p, bookings b){
+
+        /*Date fdate = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            fdate =  format.parse(b.getD());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+        db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        ContentValues cv1 = new ContentValues();
+        String qry = "select * from "+pass_TABLE_NAME;
+        Cursor cr  =  db.rawQuery(qry,null);
+        //cr.moveToFirst();
+        int count = cr.getCount();
+        cv.put("p_id",count);
+        cv.put("pname",p.getPname());
+        cv.put("b_id",p.getBid());
+        cv.put("seatno", p.getSeatno());
+        db.insert(pass_TABLE_NAME, null, cv);
+        cv1.put("b_id", b.getBid());
+        cv1.put("f_id", b.getFid());
+        cv1.put("u_id", b.getUid()); //to change it to UID
+        cv1.put("p_id", count);
+        cv1.put("bookedDate", b.getD());
+        db.insert(booking_TABLE_NAME, null, cv1);
+        cr.close();
+        db.close();
+    }
+
+    public int getMaxBookId()
+    {
+        int bid =0;
+        db = this.getReadableDatabase();
+        String qry ="select max(b_id) from "+booking_TABLE_NAME;
+        Cursor cr  =  db.rawQuery(qry,null);
+        if(cr.moveToFirst()) {
+            bid = cr.getInt(0);
+        }
+        db.close();
+        return bid;
+    }
+
+    public int getUserId(String username)
+    {
+        db = this.getReadableDatabase();
+        String qry= "select id from "+TABLE_NAME +" where uname ='"+username+"'" ;
+        Cursor cr=db.rawQuery(qry,null);
+        cr.moveToFirst();
+        return Integer.parseInt(cr.getString(0));
     }
 
     public void insertBooking(bookings b) {
@@ -70,7 +132,6 @@ public class usersdbhelper extends SQLiteOpenHelper{
         cv.put("bookedDate", s);
         db.insert(booking_TABLE_NAME, null, cv);
         db.close();
-
 
     }
     public void insertFlight(flight f){
@@ -152,6 +213,32 @@ public class usersdbhelper extends SQLiteOpenHelper{
    /* public int checkseats(int p1,int p2,String fid){
 
     }*/
+
+    //To insert seats in the table for the specific date
+    // To do check if the booking is done for same date, if same date is given do not insert
+    public void insertSeatsTable(String date)
+    {
+        db = this.getReadableDatabase();
+        String fid;
+        int maxseats;
+        Date fdate = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            fdate =  format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String query = "select f_id,maxseats from "+flight_TABLE_NAME;
+        Cursor c = 	db.rawQuery(query, null);
+        if(c.moveToFirst()){
+            do{
+                fid = c.getString(0);
+                maxseats= c.getInt(1);
+                db.execSQL("insert into "+seats_TABLE_NAME+" values ('"+fid+"','"+fdate+"',"+maxseats+")");
+            }while(c.moveToNext());
+        }
+        db.close();
+    }
 
     public Cursor getRequiredFlight(String origin, String dest) {
         db = this.getReadableDatabase();

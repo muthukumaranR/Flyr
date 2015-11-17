@@ -26,6 +26,7 @@ import java.util.List;
 public class MainActivity extends Activity implements TabListener, DatePickerFragment.dateInterface {
     usersdbhelper udb = new usersdbhelper(this);
     List<Fragment> fragList = new ArrayList<Fragment>();
+    String username;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class MainActivity extends Activity implements TabListener, DatePickerFra
 
         setContentView(R.layout.activity_main);
         ActionBar bar = getActionBar();
+        username = getIntent().getStringExtra("username");
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
        /*String ds =  getIntent().getStringExtra("datestr");
         Button dateButton = (Button)findViewById(R.id.dateButton);
@@ -163,16 +165,18 @@ public class MainActivity extends Activity implements TabListener, DatePickerFra
         String dest =desttext.getText().toString();
         Button datebutton = (Button)findViewById(R.id.dateButton);
         String datebtn =datebutton.getText().toString();
-
+        int id=  udb.getUserId(username);
+        String ID= Integer.toString(id);
         Spinner dropdown = (Spinner) findViewById(R.id.spinner);
         String pass = dropdown.getSelectedItem().toString();
         i.putExtra("orig",orig);
         i.putExtra("dest",dest);
         i.putExtra("date",datebtn);
         i.putExtra("pass", pass);
+        i.putExtra("id",ID);
         startActivity(i);
         //shift intent to bookactivity, pass ,dt ,orig,dest,date  to it
-        startActivity(i);
+        //startActivity(i);
     }
 
 }

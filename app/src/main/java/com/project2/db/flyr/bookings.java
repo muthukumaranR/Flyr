@@ -6,14 +6,17 @@ import java.util.Date;
  * Created by karthick on 11/11/2015.
  */
 public class bookings {
-    private String bid,fid,uid,pid;
-    private Date bookedDate;
+    private String fid;
+    private int uid,pid;
+    private String bookedDate;
+    private int bid;
 
-    public String getBid() {
+
+    public int getBid() {
         return bid;
     }
 
-    public void setBid(String bid) {
+    public void setBid(int bid) {
         this.bid = bid;
     }
 
@@ -25,27 +28,27 @@ public class bookings {
         this.fid = fid;
     }
 
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 
-    public String getPid() {
+    public int getPid() {
         return pid;
     }
 
-    public void setPid(String pid) {
+    public void setPid(int pid) {
         this.pid = pid;
     }
 
-    public Date getD() {
+    public String getD() {
         return bookedDate;
     }
 
-    public void setD(Date bookedDate) {
+    public void setD(String bookedDate) {
         this.bookedDate = bookedDate;
     }
 }

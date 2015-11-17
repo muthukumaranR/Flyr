@@ -8,28 +8,33 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 /**
  * Created by Deepak on 11/15/2015.
  */
 //check again
 public class bookingActivity extends Activity {
-    private int passw;
-    private String orig,dest,date;
+    private String orig,dest,date,passw,uid;
     String pass = "pass";
+    usersdbhelper udb = new usersdbhelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        passw =getIntent().getIntExtra("pass", 1);
+        passw =getIntent().getStringExtra("pass");
         orig = getIntent().getStringExtra("orig");
         dest = getIntent().getStringExtra("dest");
         date = getIntent().getStringExtra("date");
-        if(passw == 1){
+        uid = getIntent().getStringExtra("id");
+
+        if(passw.equals("1")){
             setContentView(R.layout.passenger1);
         }
-        else{
+        else
+        {
             setContentView(R.layout.passenger2);
         }
+        udb.insertSeatsTable(date);
         populateListOfBookedFlights();
 
     }
@@ -67,6 +72,20 @@ public class bookingActivity extends Activity {
                 Intent i = new Intent(bookingActivity.this, bookActivity.class);
                 String s = ""+id+"";
                 i.putExtra("id", s);
+                i.putExtra("pass",passw);
+                i.putExtra("date", date);
+                i.putExtra("uid",uid);
+                if(passw.equals("1")) {
+                    String passname1 = ((TextView) findViewById(R.id.pass_1)).getText().toString();
+                    i.putExtra("pass1", passname1);
+                }
+                else
+                {
+                    String passname1 = ((TextView) findViewById(R.id.pass_2_1)).getText().toString();
+                    String passname2 = ((TextView) findViewById(R.id.pass_2_2)).getText().toString();
+                    i.putExtra("pass1", passname1);
+                    i.putExtra("pass2", passname2);
+                }
                 startActivity(i);
 
             }

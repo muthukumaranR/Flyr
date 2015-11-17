@@ -53,6 +53,7 @@ public class LoginActivity extends Activity {
             if (Objects.equals(password, udb.userpass(username))){
                 //auth succ
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
+
                 i.putExtra("username",username);
                 startActivity(i);
             }
