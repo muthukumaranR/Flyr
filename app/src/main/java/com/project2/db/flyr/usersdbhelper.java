@@ -228,15 +228,23 @@ public class usersdbhelper extends SQLiteOpenHelper{
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String query = "select f_id,maxseats from "+flight_TABLE_NAME;
-        Cursor c = 	db.rawQuery(query, null);
-        if(c.moveToFirst()){
-            do{
-                fid = c.getString(0);
-                maxseats= c.getInt(1);
-                db.execSQL("insert into "+seats_TABLE_NAME+" values ('"+fid+"','"+fdate+"',"+maxseats+")");
-            }while(c.moveToNext());
+       String s = " select count(*) from seats where fdate ='"+fdate+"'";
+        int count;
+        Cursor cr = db.rawQuery(s,null);
+        cr.moveToFirst();
+        count = cr.getInt(0);
+        if(count == 0 ) {
+            String query = "select f_id,maxseats from " + flight_TABLE_NAME;
+            Cursor c = db.rawQuery(query, null);
+            if (c.moveToFirst()) {
+                do {
+                    fid = c.getString(0);
+                    maxseats = c.getInt(1);
+                    db.execSQL("insert into " + seats_TABLE_NAME + " values ('" + fid + "','" + fdate + "'," + maxseats + ")");
+                } while (c.moveToNext());
+            }
         }
+        cr.close();
         db.close();
     }
 
@@ -249,6 +257,17 @@ public class usersdbhelper extends SQLiteOpenHelper{
         }
         return c;
     }
+
+    public Cursor getFlightHistory(int id) {
+        db = this.getReadableDatabase();
+        String query = "select b.b_id as _id,f.fname,f.origin,f.dest,b.bookedDate from "+flight_TABLE_NAME+" f,"+booking_TABLE_NAME+" b where f.f_id=b.f_id and b.u_id="+id;
+        Cursor c = 	db.rawQuery(query, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+        return c;
+    }
+
 
     // Get a specific row (by rowId)
     public Cursor getFlightRow(String id) {

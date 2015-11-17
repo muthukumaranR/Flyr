@@ -12,12 +12,17 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +50,8 @@ public class MainActivity extends Activity implements TabListener, DatePickerFra
                 tab.setText("Book Tickets");
                 tab.setTabListener(this);
             } else {
-                tab.setText("Cancel Tickets");
+                tab.setText("Tickets History");
                 tab.setTabListener(this);
-
             }
 
             bar.addTab(tab);
@@ -178,6 +182,15 @@ public class MainActivity extends Activity implements TabListener, DatePickerFra
         //shift intent to bookactivity, pass ,dt ,orig,dest,date  to it
         //startActivity(i);
     }
+
+    public void onGenerateClick(View a) {
+        Intent i = new Intent(MainActivity.this,TicketHistory.class);
+        i.putExtra("username",username);
+        startActivity(i);
+    }
+
+
+
 
 }
 

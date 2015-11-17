@@ -38,8 +38,7 @@ public class TabFragment extends Fragment {
             dateButton.setText(dateFormat.format(date));
             return v;
         } else {
-            v = inflater.inflate(R.layout.cancelticket, null);
-            Button b = (Button) v.findViewById(R.id.button);
+            v = inflater.inflate(R.layout.dummy_history, null);
             return v;
         }
     }
