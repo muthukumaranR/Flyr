@@ -382,7 +382,7 @@ public class usersdbhelper extends SQLiteOpenHelper{
     {
         int fid=0;
         db =this.getReadableDatabase();
-        String query = "select distinct fid from "+booking_TABLE_NAME+" where b_id="+bid;
+        String query = "select f_id from "+booking_TABLE_NAME+" where b_id="+bid;
         Cursor c = 	db.rawQuery(query, null);
         if (c != null) {
             c.moveToFirst();
@@ -403,10 +403,11 @@ public class usersdbhelper extends SQLiteOpenHelper{
         return temp;
     }
 
-    public void cancelTicket(int fid,String date,int nopass)
+    public void bookCancelTicket(int fid,String date,int nopass,int bid,String bdflag)
     {
         db =this.getReadableDatabase();
         int seats=0;
+        int remseats=0;
         Date fdate = null;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -420,9 +421,24 @@ public class usersdbhelper extends SQLiteOpenHelper{
             c.moveToFirst();
             seats=c.getInt(0);
         }
-        int remseats = seats + nopass;
-        String query = "update "+seats_TABLE_NAME+" set remseats="+remseats+"  f_id='"+fid+"'and fdate='"+fdate+"'";
+        if(bdflag.equals("book"))
+        {
+            remseats = seats - nopass;
+        }
+        else if(bdflag.equals("cancel"))
+        {
+            remseats = seats + nopass;
+        }
+        String query = "update "+seats_TABLE_NAME+" set remseats="+remseats+" where f_id='"+fid+"'and fdate='"+fdate+"'";
         db.execSQL(query);
+        if(bdflag.equals("cancel")) {
+            String delbookquery = "delete from " + booking_TABLE_NAME + " where b_id=" + bid;
+            String delPassQuery = "delete from " + pass_TABLE_NAME + " where b_id=" + bid;
+            db.execSQL(delbookquery);
+            db.execSQL(delPassQuery);
+        }
+        c.close();
+        db.close();
     }
 
     // Get a specific row (by rowId)

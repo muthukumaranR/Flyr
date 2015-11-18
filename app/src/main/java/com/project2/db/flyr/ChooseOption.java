@@ -47,9 +47,11 @@ public class ChooseOption extends Activity{
 
     public void onClickCancel(View v) {
         fid = udb.getFlightId(bid);
-        udb.cancelTicket(fid,bookedDate,nopass);
-
+        udb.bookCancelTicket(fid,bookedDate,nopass,bid,"cancel");
+        Intent i =new Intent(ChooseOption.this, MainActivity.class);
+        startActivity(i);
     }
+
     public void onClickCheckin(View v) {
         Intent i = new Intent(ChooseOption.this,CheckinActivity.class);
         i.putExtra("bid",bid);

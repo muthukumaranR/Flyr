@@ -66,7 +66,9 @@ public class bookActivity extends Activity {
             b.setD(date);
             b.setBid(bid + 1);
             b.setUid(Integer.parseInt(uid));
-            udb.insertPassenger(p,b);
+            udb.insertPassenger(p, b);
+            int fid= udb.getFlightId(bid+1);
+            udb.bookCancelTicket(fid, b.getD(), 1, 0, "book");
         }
         else {
             int bid=udb.getMaxBookId();
@@ -88,7 +90,9 @@ public class bookActivity extends Activity {
             b.setD(date);
             b.setBid(bid + 1);
             b.setUid(Integer.parseInt(uid));
-            udb.insertPassenger(p2,b);
+            udb.insertPassenger(p2, b);
+            int fid= udb.getFlightId(bid+1);
+            udb.bookCancelTicket(fid, b.getD(), 2, 0, "book");
         }
         Toast.makeText(getApplicationContext(),
                 "Ticket Booked Successfully", Toast.LENGTH_LONG).show();
