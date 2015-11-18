@@ -60,6 +60,7 @@ public class ChooseOption extends Activity{
         i.putExtra("bid",bid);
         i.putExtra("no_pass",nopass);
         i.putExtra("uid",uid);
+        i.putExtra("username",udb.getUname(uid));
         startActivity(i);
     }
 }

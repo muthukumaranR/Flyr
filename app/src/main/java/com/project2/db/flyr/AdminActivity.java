@@ -19,8 +19,8 @@ public class AdminActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin);
         String aid = getIntent().getStringExtra("adminId");
-        TextView tv = (TextView)findViewById(R.id.Aid);
-        tv.setText(aid);
+       /* TextView tv = (TextView)findViewById(R.id.Aid);
+        tv.setText(aid);*/
     }
 
     @Override

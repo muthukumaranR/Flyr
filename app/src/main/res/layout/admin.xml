@@ -13,12 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="225dp"
-        android:layout_height="161dp"
-        android:id="@+id/Aid"
-        android:layout_gravity="center_horizontal"
-        android:background="@mipmap/fly_image" />
+
 
     <ScrollView
         android:layout_width="fill_parent"
