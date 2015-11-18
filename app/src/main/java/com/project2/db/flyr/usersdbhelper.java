@@ -32,11 +32,11 @@ public class usersdbhelper extends SQLiteOpenHelper{
     public static final String TABLE_CREATE = "create table users (id integer primary key not null , uname text not null,pass text not null);";
     public static final String flight_TABLE_CREATE ="create table flight (f_id text primary key not null, fname text not null,maxseats integer not null,origin text,dest text,fare integer,Start integer,end integer);";
     public static final String port_TABLE_CREATE =" ";
-    public static final String bookings_TABLE_CREATE = "create table bookings(b_id integer not null,f_id text not null,u_id integer not null,p_id integer not null,bookedDate date not null, primary key(b_id,p_id), foreign key(f_id) references flight(f_id), foreign key(u_id) references users(id), foreign key(p_id) references passenger(p_id));";
+    public static final String bookings_TABLE_CREATE = "create table bookings(b_id integer not null,f_id text not null,u_id integer not null,p_id integer not null,bookedDate date not null,primary key(b_id, p_id),foreign key(f_id) references flight(f_id), foreign key(u_id) references users(id), foreign key(p_id) references passenger(p_id));";
     public static final String admin_TABLE_CREATE ="create table admin (aid integer primary key not null ,pass text not null);";
     public static final String passenger_TABLE_CREATE ="create table passenger(p_id integer primary key not null ,pname text not null, b_id integer,seatno integer);";
-    public static final String seats_TABLE_CREATE="create table seats(f_id text not null,fdate date, remseats integer,primary key(f_id,date));";
-
+    public static final String seats_TABLE_CREATE="create table seats(f_id text not null,fdate date not null, remseats integer,primary key(f_id,fdate));";
+    //foreign key(f_id) references flight(f_id), foreign key(u_id) references users(id), foreign key(p_id) references passenger(p_id)//////primary key(b_id,p_id)//////,primary key(f_id,date)
     SQLiteDatabase db;
 
     public usersdbhelper(Context context) {
