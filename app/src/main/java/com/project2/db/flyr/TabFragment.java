@@ -43,13 +43,11 @@ public class TabFragment extends Fragment {
             Date date = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy ");
             dateButton.setText(dateFormat.format(date));
-           // index++;
             return v;
 
         } else {
             v = inflater.inflate(R.layout.dummy_history, null);
-            u.getuser();
-           // index--;
+            //u.getuser();
             return v;
         }
     }
