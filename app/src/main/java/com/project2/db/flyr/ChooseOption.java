@@ -6,13 +6,14 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Deepak on 11/17/2015.
  */
 public class ChooseOption extends Activity{
-    private int bid,uid,nopass,fid;
     usersdbhelper udb = new usersdbhelper(this);
+    private int bid, uid, nopass, fid;
     private String fname,origin,dest,bookedDate;
 
     @Override
@@ -48,6 +49,8 @@ public class ChooseOption extends Activity{
     public void onClickCancel(View v) {
         fid = udb.getFlightId(bid);
         udb.bookCancelTicket(fid,bookedDate,nopass,bid,"cancel");
+        Toast.makeText(getApplicationContext(),
+                "Ticket Cancelled Successfully", Toast.LENGTH_LONG).show();
         Intent i =new Intent(ChooseOption.this, MainActivity.class);
         startActivity(i);
     }

@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#be505e"
+    android:orientation="vertical"
     android:weightSum="1">
 
     <Button
+        android:id="@+id/generate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Generate booked Tickets"
-        android:id="@+id/generate"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_weight="0.03"
         android:onClick="onGenerateClick"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:text="Generate booked Tickets" />
 </RelativeLayout>

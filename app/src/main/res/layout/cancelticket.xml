@@ -6,15 +6,16 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Booking History is:"
-        android:id="@+id/textView17" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="18sp" />
 
     <ListView
+        android:id="@+id/listHistory"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listHistory"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

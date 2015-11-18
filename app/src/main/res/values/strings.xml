@@ -10,7 +10,7 @@
     <string name="spassword"></string>
     <string name="spassword2"></string>
     <string name="pick_date">pick_date</string>
-    <string-array name="planets_array">
+    <string-array name="P_array">
         <item>1</item>
         <item>2</item>
     </string-array>

@@ -3,109 +3,112 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:id="@+id/flight_name3"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:id="@+id/cancelId"
-        android:layout_marginBottom="41dp"
-        android:onClick="onClickCancel"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="67dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentTop="true"
         android:text="Large Text"
-        android:id="@+id/flight_origin3"
-        android:layout_marginTop="113dp"
-        android:layout_below="@+id/flight_name3"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/flight_dest3"
-        android:layout_marginBottom="101dp"
-        android:layout_above="@+id/cancelId"
-        android:layout_alignParentStart="true" />
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
+        android:id="@+id/cancelId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check-In"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="51dp"
+        android:layout_toEndOf="@+id/textView23"
+        android:background="#be505e"
+        android:onClick="onClickCancel"
+        android:text="Cancel Ticket"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/flight_origin3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/flight_name3"
+        android:layout_marginTop="113dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/flight_dest3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cancelId"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="101dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
         android:id="@+id/checkId"
-        android:layout_marginStart="56dp"
-        android:onClick="onClickCheckin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/cancelId"
-        android:layout_toEndOf="@+id/cancelId" />
+        android:layout_marginStart="56dp"
+        android:layout_toEndOf="@+id/cancelId"
+        android:background="#be505e"
+        android:onClick="onClickCheckin"
+        android:text="Check-In"
+        android:textColor="#FFFFFF" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:id="@+id/nopass3"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/flight_origin3"
-        android:layout_alignStart="@+id/checkId" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignBottom="@+id/flight_origin3"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/checkId"
         android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
         android:id="@+id/flight_date3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/flight_dest3"
         android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/checkId" />
+        android:layout_alignStart="@+id/checkId"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Origin:"
         android:id="@+id/textView23"
-        android:layout_above="@+id/nopass3"
-        android:layout_alignParentStart="true" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Destination"
+        android:layout_above="@+id/nopass3"
+        android:layout_alignParentStart="true"
+        android:text="Origin:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
         android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/flight_dest3"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:text="Destination"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="No of Passengers:"
         android:id="@+id/textView26"
-        android:layout_above="@+id/nopass3"
-        android:layout_alignStart="@+id/nopass3" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Booked Date"
+        android:layout_above="@+id/nopass3"
+        android:layout_alignStart="@+id/nopass3"
+        android:text="No of Passengers:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
         android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/flight_date3"
-        android:layout_alignStart="@+id/flight_date3" />
+        android:layout_alignStart="@+id/flight_date3"
+        android:text="Booked Date"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

@@ -18,10 +18,11 @@
         android:id="@+id/flight_fare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/flight_name2"
+        android:layout_above="@+id/textView30"
         android:layout_alignParentEnd="true"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#be505e"
         android:textSize="15sp" />
     android:layout_marginRight="20dp"
     android:layout_alignTop="@+id/flight_name"
@@ -33,7 +34,8 @@
         android:id="@+id/flight_origin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/flight_name2"
+        android:layout_alignStart="@+id/textView29"
+        android:layout_below="@+id/textView29"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
     android:layout_below="@+id/textView23"
@@ -43,8 +45,8 @@
         android:id="@+id/flight_dest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/flight_name2"
-        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@+id/textView30"
+        android:layout_alignTop="@+id/flight_origin"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
     android:layout_below="@+id/textView22"
@@ -54,13 +56,32 @@
         android:id="@+id/textView24"
         android:layout_width="15dp"
         android:layout_height="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="-1dp"
+        android:layout_alignTop="@+id/flight_fare"
         android:layout_toStartOf="@+id/flight_fare"
         android:text="$"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#be505e"
         android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/flight_name2"
+        android:layout_below="@+id/flight_name2"
+        android:text="Origin"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/flight_dest"
+        android:layout_toStartOf="@+id/flight_fare"
+        android:text="Destination"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:textStyle="bold" />
 
 </RelativeLayout>
