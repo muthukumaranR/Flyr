@@ -389,7 +389,7 @@ public class usersdbhelper extends SQLiteOpenHelper{
 
     public Cursor getFlightHistory(int id) {
         db = this.getReadableDatabase();
-        String query = "select b.b_id as _id,f.fname,f.origin,f.dest,b.bookedDate, count(b.b_id) from "+flight_TABLE_NAME+" f,"+booking_TABLE_NAME+" b where f.f_id=b.f_id and b.u_id="+id+" group by b.b_id";
+        String query = "select b.b_id as _id,f.fname,f.origin,f.dest,b.bookedDate, count(b.b_id) as count from "+flight_TABLE_NAME+" f,"+booking_TABLE_NAME+" b where f.f_id=b.f_id and b.u_id="+id+" group by b.b_id";
         Cursor c = 	db.rawQuery(query, null);
         if (c != null) {
             c.moveToFirst();
