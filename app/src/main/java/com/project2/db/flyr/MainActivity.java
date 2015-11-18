@@ -22,13 +22,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends Activity implements TabListener, DatePickerFragment.dateInterface {
+public class MainActivity extends Activity implements TabListener, DatePickerFragment.dateInterface, TabFragment.user {
     usersdbhelper udb = new usersdbhelper(this);
     List<Fragment> fragList = new ArrayList<Fragment>();
     String username;
@@ -114,6 +113,52 @@ public class MainActivity extends Activity implements TabListener, DatePickerFra
         }
     }
 
+    public void getuser()
+    {
+        //String username =u.getuser();
+        int uid;
+        uid=  udb.getUserId(username);
+        usersdbhelper udb = new usersdbhelper(this);
+        Cursor cursor = udb.getFlightHistory(uid);
+
+        // Allow activity to manage lifetime of the cursor.
+        // DEPRECATED! Runs on the UI thread, OK fcc or small/short queries.
+        startManagingCursor(cursor);
+
+        // Setup mapping from cursor to view fields:
+        String[] fromFieldNames = new String[]
+                {"fname", "origin", "dest", "bookedDate"};
+        int[] toViewIDs = new int[]
+                {R.id.flight_name2, R.id.flight_origin, R.id.flight_dest, R.id.flight_fare};
+
+        // Create adapter to may columns of the DB onto elemesnt in the UI.
+        SimpleCursorAdapter myCursorAdapter =
+                new SimpleCursorAdapter(
+                        this,        // Context
+                        R.layout.item_layout,    // Row layout template
+                        cursor,                    // cursor (set of DB records t o map)
+                        fromFieldNames,            // DB Column names
+                        toViewIDs                // View IDs to put information in
+                );
+
+        // Set the adapter for the list view
+        ListView bookedList = (ListView)findViewById(R.id.listHistory);
+        bookedList.setAdapter(myCursorAdapter);
+        bookedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String bid = "" + id + "";
+                //String userid = ""+uid+"";
+                Intent i = new Intent(MainActivity.this, ChooseOption.class);
+                i.putExtra("bid", bid);
+                //i.putExtra("uid",userid);
+                startActivity(i);
+            }
+        });
+
+    }
+
+
     public void dateString(String s) {
         Button dateButton = (Button) findViewById(R.id.dateButton);
         dateButton.setText(s);
@@ -136,32 +181,7 @@ public class MainActivity extends Activity implements TabListener, DatePickerFra
     }
 
 
-//    public void onRadioButtonClicked(View view) {
-//
-//        boolean checked = ((RadioButton) view).isChecked();
-//        switch (view.getId()) {
-//            case R.id.rb1:
-//                if (checked)
-//
-//                    break;
-//            case R.id.rb2:
-//                if (checked)
-//
-//                    break;
-//            case R.id.rb3:
-//                if (checked)
-//                    // Ninjas rule
-//                    break;
-//            case R.id.rb4:
-//                if (checked)
-//                    // Ninjas rule
-//                    break;
-//        }
-//
-//    }
-
     public void onSearchflightclick(View a) {
-
         Intent i = new Intent(MainActivity.this,bookingActivity.class);
         EditText origtext = (EditText)findViewById(R.id.origin);
         String orig =origtext.getText().toString();
@@ -182,15 +202,27 @@ public class MainActivity extends Activity implements TabListener, DatePickerFra
         //shift intent to bookactivity, pass ,dt ,orig,dest,date  to it
         //startActivity(i);
     }
+    private void onClickListView(View v)
+    {
+        ListView bookedList = (ListView)findViewById(R.id.listHistory);
+        bookedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String bid= ""+id+"";
+                //String userid = ""+uid+"";
+                Intent i = new Intent(MainActivity.this,ChooseOption.class);
+                i.putExtra("bid",bid);
+                //i.putExtra("uid",userid);
+                startActivity(i);
+            }
+        });
+    }
 
     public void onGenerateClick(View a) {
         Intent i = new Intent(MainActivity.this,TicketHistory.class);
         i.putExtra("username",username);
         startActivity(i);
     }
-
-
-
 
 }
 

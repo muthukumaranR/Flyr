@@ -51,7 +51,7 @@ public class bookingActivity extends Activity {
         String[] fromFieldNames = new String[]
                 {"fname","origin","dest","fare"};
         int[] toViewIDs = new int[]
-                {R.id.flight_name,R.id.flight_origin,R.id.flight_dest,R.id.flight_fare};
+                {R.id.flight_name2,R.id.flight_origin,R.id.flight_dest,R.id.flight_fare};
 
         // Create adapter to may columns of the DB onto elemesnt in the UI.
         SimpleCursorAdapter myCursorAdapter =

@@ -38,15 +38,15 @@ public class TicketHistory extends Activity {
 
         // Setup mapping from cursor to view fields:
         String[] fromFieldNames = new String[]
-                {"fname", "origin", "dest", "bookedDate"};
+                {"fname", "origin", "dest","bookedDate","count"};
         int[] toViewIDs = new int[]
-                {R.id.flight_name, R.id.flight_origin, R.id.flight_dest, R.id.flight_fare};
+                {R.id.flight_name2, R.id.flight_origin2, R.id.flight_dest2, R.id.flight_date2, R.id.no_pass2};
 
         // Create adapter to may columns of the DB onto elemesnt in the UI.
         SimpleCursorAdapter myCursorAdapter =
                 new SimpleCursorAdapter(
                         this,        // Context
-                        R.layout.item_layout,    // Row layout template
+                        R.layout.item_layout1,    // Row layout template
                         cursor,                    // cursor (set of DB records t o map)
                         fromFieldNames,            // DB Column names
                         toViewIDs                // View IDs to put information in

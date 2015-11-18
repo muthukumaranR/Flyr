@@ -260,7 +260,7 @@ public class usersdbhelper extends SQLiteOpenHelper{
 
     public Cursor getFlightHistory(int id) {
         db = this.getReadableDatabase();
-        String query = "select b.b_id as _id,f.fname,f.origin,f.dest,b.bookedDate from "+flight_TABLE_NAME+" f,"+booking_TABLE_NAME+" b where f.f_id=b.f_id and b.u_id="+id;
+        String query = "select b.b_id as _id,f.fname,f.origin,f.dest,b.bookedDate,count(b.b_id) as count from "+flight_TABLE_NAME+" f,"+booking_TABLE_NAME+" b where f.f_id=b.f_id and b.u_id="+id+" group by b.b_id";
         Cursor c = 	db.rawQuery(query, null);
         if (c != null) {
             c.moveToFirst();
@@ -268,6 +268,51 @@ public class usersdbhelper extends SQLiteOpenHelper{
         return c;
     }
 
+    // Get a specific row (by rowId)
+    public Cursor getBookingRow(int uid, int bid) {
+        db = this.getReadableDatabase();
+        String query = "select  b.b_id,f.fname,f.origin,f.dest,b.bookedDate,count(b.b_id) as count from "+flight_TABLE_NAME+" f,"+booking_TABLE_NAME+" b where f.f_id=b.f_id and b.u_id="+uid+" and b.b_id="+bid+" group by b.b_id";
+        Cursor c = 	db.rawQuery(query, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+        return c;
+    }
+
+    public int getFlightId(int bid)
+    {
+        int fid=0;
+        db =this.getReadableDatabase();
+        String query = "select distinct fid from "+booking_TABLE_NAME+" where b_id="+bid;
+        Cursor c = 	db.rawQuery(query, null);
+        if (c != null) {
+            c.moveToFirst();
+            fid =c.getInt(0);
+        }
+        return fid;
+    }
+
+    public void cancelTicket(int fid,String date,int nopass)
+    {
+        db =this.getReadableDatabase();
+        int seats=0;
+        Date fdate = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            fdate =  format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String qry= "select remseats from "+seats_TABLE_NAME+" where f_id='"+fid+"'and fdate='"+fdate+"'";
+        Cursor c = 	db.rawQuery(qry, null);
+        if (c != null) {
+            c.moveToFirst();
+            seats=c.getInt(0);
+        }
+        int remseats = seats + nopass;
+        String query = "update "+seats_TABLE_NAME+" set remseats="+remseats+"  f_id='"+fid+"'and fdate='"+fdate+"'";
+        db.execSQL(query);
+    }
 
     // Get a specific row (by rowId)
     public Cursor getFlightRow(String id) {
