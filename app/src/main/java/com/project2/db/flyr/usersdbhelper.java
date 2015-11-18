@@ -32,7 +32,7 @@ public class usersdbhelper extends SQLiteOpenHelper{
     public static final String TABLE_CREATE = "create table users (id integer primary key not null , uname text not null,pass text not null);";
     public static final String flight_TABLE_CREATE ="create table flight (f_id text primary key not null, fname text not null,maxseats integer not null,origin text,dest text,fare integer,Start integer,end integer);";
     public static final String port_TABLE_CREATE =" ";
-    public static final String bookings_TABLE_CREATE = "create table bookings(b_id integer not null,f_id text not null,u_id integer not null,p_id integer not null,bookedDate date not null);";
+    public static final String bookings_TABLE_CREATE = "create table bookings(b_id integer not null,f_id text not null,u_id integer not null,p_id integer not null,bookedDate date not null primary key(b_id,p_id) foreign);";
     public static final String admin_TABLE_CREATE ="create table admin (aid integer primary key not null ,pass text not null);";
     public static final String pass_TABLE_CREATE ="create table pass (p_id integer primary key not null ,pass text not null,seat integer);";
     public static final String passenger_TABLE_CREATE ="create table passenger(p_id integer primary key not null ,pname text not null, b_id integer,seatno integer);";

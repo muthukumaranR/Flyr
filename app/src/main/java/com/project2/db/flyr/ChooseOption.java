@@ -52,6 +52,7 @@ public class ChooseOption extends Activity{
         Toast.makeText(getApplicationContext(),
                 "Ticket Cancelled Successfully", Toast.LENGTH_LONG).show();
         Intent i =new Intent(ChooseOption.this, MainActivity.class);
+        i.putExtra("username", udb.getUname(uid));
         startActivity(i);
     }
 
@@ -60,7 +61,7 @@ public class ChooseOption extends Activity{
         i.putExtra("bid",bid);
         i.putExtra("no_pass",nopass);
         i.putExtra("uid",uid);
-        i.putExtra("username",udb.getUname(uid));
+        i.putExtra("username", udb.getUname(uid));
         startActivity(i);
     }
 }
