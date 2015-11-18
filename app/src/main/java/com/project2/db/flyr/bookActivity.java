@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,14 +12,12 @@ import android.widget.Toast;
  * Created by Deepak on 11/16/2015.
  */
 public class bookActivity extends Activity {
+    public int bookId = 0;
+    usersdbhelper udb = new usersdbhelper(this);
+    String passname1, passname2;
     private int fare;
     private String passw;
-    public int bookId=0;
     private String id1,fname,origin,dest,fares,date,uid;
-    usersdbhelper udb = new usersdbhelper(this);
-    String passname1,passname2;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,23 +35,21 @@ public class bookActivity extends Activity {
             passname2 = getIntent().getStringExtra("pass2");
         }
         Cursor cursor = udb.getFlightRow(id1);
-        if(cursor.getCount() >0) {
-            fname = cursor.getString(0);
-            origin = cursor.getString(1);
-            dest = cursor.getString(2);
-            fare = cursor.getInt(3);
-            fares = "" + fare + "";
-            setContentView(R.layout.activity_booking);
+        fname = cursor.getString(0);
+        origin = cursor.getString(1);
+        dest = cursor.getString(2);
+        fare = cursor.getInt(3);
+        fares = "" + fare + "";
+        setContentView(R.layout.activity_booking);
 
-            TextView fname_tv = (TextView) findViewById(R.id.textView18);
-            TextView origin_tv = (TextView) findViewById(R.id.textView19);
-            TextView dest_tv = (TextView) findViewById(R.id.textView20);
-            TextView fare_tv = (TextView) findViewById(R.id.textView21);
-            fname_tv.setText(fname);
-            origin_tv.setText(origin);
-            dest_tv.setText(dest);
-            fare_tv.setText(fares);
-        }
+        TextView fname_tv = (TextView) findViewById(R.id.textView18);
+        TextView origin_tv = (TextView) findViewById(R.id.textView19);
+        TextView dest_tv = (TextView) findViewById(R.id.textView20);
+        TextView fare_tv = (TextView) findViewById(R.id.textView21);
+        fname_tv.setText(fname);
+        origin_tv.setText(origin);
+        dest_tv.setText(dest);
+        fare_tv.setText(fares);
     }
 
     public void onBookingButtonClick(View v) {
@@ -95,7 +90,8 @@ public class bookActivity extends Activity {
             b.setUid(Integer.parseInt(uid));
             udb.insertPassenger(p2,b);
         }
-        Toast.makeText(bookActivity.this, "booked successfully!", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),
+                "Ticket Booked Successfully", Toast.LENGTH_LONG).show();
         Intent i = new Intent(bookActivity.this,MainActivity.class);
         i.putExtra("username", udb.getUname(Integer.parseInt(uid)));
         startActivity(i);

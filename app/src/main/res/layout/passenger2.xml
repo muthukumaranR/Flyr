@@ -3,65 +3,69 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="passenger 1 Name"
-        android:id="@+id/textView4"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:text="Passenger Name 1"
+        android:textStyle="bold" />
 
     <EditText
+
+        android:id="@+id/pass_2_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/pass_2_1"
-        android:layout_below="@+id/textView4"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/textView4"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
 
     <TextView
+        android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="passenger 2 name"
-        android:id="@+id/textView15"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/pass_2_1"
-        android:layout_alignParentStart="true" />
+        android:text="Passenger Name 2" />
 
     <EditText
+        android:id="@+id/pass_2_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/pass_2_2"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView15"
-        android:layout_alignParentLeft="true" />
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/pass_2_2">
             <TextView
+                android:id="@+id/flight_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="The List of avaliabe Flights are:"
-                android:id="@+id/flight_text"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true" />
+                android:layout_alignParentTop="true"
+                android:text="Available Flights"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="13sp" />
 
             <ListView
                 android:id="@+id/listBooking"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:dividerHeight="0.1dp"
-                android:divider="#0000CC"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/flight_text" />
+                android:layout_below="@+id/flight_text"
+                android:divider="#0000CC"
+                android:dividerHeight="0.1dp"
+                android:drawSelectorOnTop="true" />
 
         </RelativeLayout>
 </RelativeLayout>

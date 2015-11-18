@@ -11,8 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="6dp"
         android:layout_marginTop="34dp"
-        android:text="From" />
+        android:singleLine="false"
+        android:text="From"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/origin"
@@ -27,7 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/origin"
-        android:text="To" />
+        android:layout_marginLeft="6dp"
+        android:text="To"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/dest"
@@ -42,32 +47,36 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/dest"
+        android:layout_marginLeft="6dp"
         android:layout_marginTop="34dp"
-        android:text="Date" />
+        android:password="false"
+        android:text="Journey Date"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/dateButton"
         android:layout_width="400dp"
 
         android:layout_height="80dp"
-
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/date"
-        android:background="#ADD8E6"
+        android:layout_centerVertical="true"
+        android:background="#F5F5F5"
         android:onClick="showDatePickerDialog"
-        android:textSize="30sp" />
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/searchFlights"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_width="400dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="#ADD8E6"
+        android:background="#be505e"
         android:onClick="onSearchflightclick"
         android:text="Search Flights"
-        android:textSize="30sp" />
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
 
     <!--<RadioGroup-->
     <!--android:id="@+id/radio"-->
@@ -135,8 +144,20 @@
         android:id="@+id/spinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/searchFlights"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/dateButton"
+        android:layout_marginBottom="43dp"
         android:entries="@array/planets_array" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/spinner"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="15dp"
+        android:text="No. of Passengers"
+        android:textStyle="bold" />
 
 </RelativeLayout>

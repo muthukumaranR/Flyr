@@ -3,24 +3,26 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="passenger name"
-        android:id="@+id/textView16"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:text="Passenger Name"
+        android:textStyle="bold" />
 
     <EditText
+
+        android:id="@+id/pass_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/pass_1"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView16"
-        android:layout_alignParentLeft="true" />
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -28,22 +30,23 @@
             android:layout_below="@+id/pass_1">
 
             <TextView
+                android:id="@+id/flight_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="The List of avaliabe Flights are:"
-                android:id="@+id/flight_text"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true" />
+                android:layout_alignParentTop="true"
+                android:text="The List of avaliabe Flights are:"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="13sp" />
 
             <ListView
                 android:id="@+id/listBooking"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:dividerHeight="0.1dp"
-                android:divider="#0000CC"
                 android:layout_below="@+id/flight_text"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:divider="#0000CC"
+                android:dividerHeight="0.1dp" />
 
         </RelativeLayout>
 </RelativeLayout>

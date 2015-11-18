@@ -103,12 +103,10 @@ public class MainActivity extends Activity implements TabListener, DatePickerFra
 
         if (a.getId() == R.id.dateButton) {
 
-            //DatePickerFragment dpf = new DatePickerFragment();
 
-//            DatePickerDialog dp = (DatePickerDialog) dpf.onCreateDialog(Bundle.EMPTY);
-//            DatePicker dpk = dp.getDatePicker();
             DialogFragment newFragment = new DatePickerFragment();
             newFragment.show(getFragmentManager(), "datePicker");
+
 
         }
     }
