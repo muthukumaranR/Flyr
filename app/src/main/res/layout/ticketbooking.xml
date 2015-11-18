@@ -60,7 +60,7 @@
     <Button
         android:id="@+id/searchFlights"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"

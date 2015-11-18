@@ -1,6 +1,7 @@
 package com.project2.db.flyr;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -50,6 +51,10 @@ public class ChooseOption extends Activity{
 
     }
     public void onClickCheckin(View v) {
-
+        Intent i = new Intent(ChooseOption.this,CheckinActivity.class);
+        i.putExtra("bid",bid);
+        i.putExtra("no_pass",nopass);
+        i.putExtra("uid",uid);
+        startActivity(i);
     }
 }

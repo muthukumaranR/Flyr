@@ -6,10 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
+import java.util.ArrayList;
 
 /**
  * Created by karthick on 06/10/2015.
@@ -33,6 +34,7 @@ public class usersdbhelper extends SQLiteOpenHelper{
     public static final String port_TABLE_CREATE =" ";
     public static final String bookings_TABLE_CREATE = "create table bookings(b_id integer not null,f_id text not null,u_id integer not null,p_id integer not null,bookedDate date not null);";
     public static final String admin_TABLE_CREATE ="create table admin (aid integer primary key not null ,pass text not null);";
+    public static final String pass_TABLE_CREATE ="create table pass (p_id integer primary key not null ,pass text not null,seat integer);";
     public static final String passenger_TABLE_CREATE ="create table passenger(p_id integer primary key not null ,pname text not null, b_id integer,seatno integer);";
     public static final String seats_TABLE_CREATE="create table seats(f_id text not null,fdate date, remseats integer);";
 
@@ -47,6 +49,8 @@ public class usersdbhelper extends SQLiteOpenHelper{
         db.execSQL(TABLE_CREATE);
         db.execSQL(flight_TABLE_CREATE);
         db.execSQL(bookings_TABLE_CREATE);
+        db.execSQL(pass_TABLE_CREATE);
+    this.db = db;
         db.execSQL(passenger_TABLE_CREATE);
         db.execSQL(seats_TABLE_CREATE);
         this.db = db;
@@ -131,7 +135,9 @@ public class usersdbhelper extends SQLiteOpenHelper{
         cv.put("p_id", b.getPid());
         cv.put("bookedDate", s);
         db.insert(booking_TABLE_NAME, null, cv);
+        cr.close();
         db.close();
+
 
     }
     public void insertFlight(flight f){
@@ -176,19 +182,20 @@ public class usersdbhelper extends SQLiteOpenHelper{
         db = this.getReadableDatabase();
         String qry = "select * from "+TABLE_NAME;
         Cursor cr = db.rawQuery(qry,null);
-        String a,b=null;
+        String a,b;
         if(cr.moveToFirst()){
            // cr.moveToFirst();
             do{
                 a = cr.getString(1);
                if (a.equals(username)) {
                    b = cr.getString(2);
-               return b;
+                   return b;
                }
             }while(cr.moveToNext());
 
 
         }
+        cr.close();
         db.close();
     return null;
 
@@ -201,18 +208,110 @@ public class usersdbhelper extends SQLiteOpenHelper{
         //do search in db and store in arraylist
         return fid;
     }
-    public int checkseats(int p1,String fid){
-    String cQuery = "select * from flight as f,bookings as b where f.f_id = b.f_id and f_fid ='"+fid+"'";
-        Cursor cr = db.rawQuery(cQuery,null);
-        if(cr.moveToFirst()){
-
+    public int checkseats(int p1,String bid){
+        db = getReadableDatabase();
+        String maxseatquery = "select f.maxseats,b.f_id,b.bookedDate from flight as f,bookings as b where b.f_id = f.f_id and b.b_id='"+bid+"'";
+        String fid ;
+        String d;
+        Cursor cr = db.rawQuery(maxseatquery,null);
+        cr.moveToFirst();
+        fid = cr.getString(1);
+        d   = cr.getString(2);
+        if (p1>cr.getInt(0)){
+        return 0;
+        }
+        else{
+            String bpQuery = "select p.seatno from passenger as p,bookings as b where  p.p_id = b.p_id and  b.f_id ='"+fid+"' and b.bookedDate='"+d+"'";
+            cr = db.rawQuery(bpQuery,null);
+            if(cr.moveToFirst()){
+                do{//check for availability
+                if(p1 == cr.getInt(0)){
+                return -1;
+                }
+                }while(cr.moveToNext());
+            }
+            cr.close();
         }
 
-    return 0;
+    return 1;
     }
-   /* public int checkseats(int p1,int p2,String fid){
+    public int checkseats(int p1,int p2,String bid) {
+        db = this.getReadableDatabase();
+        String maxseatquery = "select f.maxseats,b.f_id,b.BookedDate from flight as f,bookings as b where b.f_id = f.f_id and b.b_id='" + bid + "'";
+        String fid;
+        String d;
+        Cursor cr = db.rawQuery(maxseatquery, null);
+        cr.moveToFirst();
+        fid = cr.getString(1);
+        d = cr.getString(2);
+        if (p1 > cr.getInt(0) || p2 > cr.getInt(0)) {
+            return 0;
+        }
+        else {
+            String bpQuery = "select p.seatno from passenger as p,bookings as b where  p.p_id = b.p_id and  b.f_id ='" + fid + "' and  b.bookedDate='" + d + "'";
+            cr = db.rawQuery(bpQuery, null);
+            if (cr.moveToFirst()) {
+                do {//check for availability
+                    if (p1 == cr.getInt(0) || p2 == cr.getInt(0)) {
+                        return -1;
+                    }
+                } while (cr.moveToNext());
+            }
+            cr.close();
 
-    }*/
+        }
+        return 1;
+    }
+
+    public void updatepass(String bid,int[] p){
+        db = this.getWritableDatabase();
+        //update public int update (String table, ContentValues values, String whereClause, String[] whereArgs)
+        String Query = "select p_id from bookings where b_id = '"+bid+"'";
+        Cursor c = db.rawQuery(Query,null);
+        int nopass  = 0 ;
+        if(c.moveToFirst())
+        {
+            do{
+                //UPDATE table_name SET column1=value1,column2=value2,... WHERE some_column=some_value;
+            String pid = c.getString(0);
+                String updateQuery = "update passenger SET seatno="+p[nopass]+" where p_id='"+pid+"'";
+                db.execSQL(updateQuery);
+                nopass++;
+        }while(c.moveToNext());
+        }
+        c.close();
+    db.close();
+    }
+    public int getnoPass(String bid){
+        db = this.getReadableDatabase();
+    String Query  = "select count(p_id) from bookings where b_id ='"+bid+"'";
+    int temp = 0;
+    Cursor c = db.rawQuery(Query,null);
+        if(c.moveToFirst()){
+            temp =  c.getInt(0);
+        }
+        c.close();
+        db.close();
+        return temp;
+    }
+
+    public boolean seatsAvailable(String fid,Date d,int pass){
+        db = this.getReadableDatabase();
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        String datestr = sdf.format(d);
+    String query = "select remseats from seats where f_id ='"+fid+"' and fdate ='"+datestr+"'";
+        Cursor cr = db.rawQuery(query,null);
+        cr.moveToFirst();
+        int temp = cr.getInt(0);
+        cr.close();
+        if(pass>=temp){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
     //To insert seats in the table for the specific date
     // To do check if the booking is done for same date, if same date is given do not insert
@@ -288,8 +387,20 @@ public class usersdbhelper extends SQLiteOpenHelper{
         if (c != null) {
             c.moveToFirst();
             fid =c.getInt(0);
+            c.close();
+            db.close();
         }
         return fid;
+    }
+    public String getUname(int uid){
+        db = this.getReadableDatabase();
+        String query = "select uname from users where id="+uid;
+        Cursor cr = db.rawQuery(query,null);
+        cr.moveToFirst();
+        String temp = cr.getString(0);
+        cr.close();
+        db.close();
+        return temp;
     }
 
     public void cancelTicket(int fid,String date,int nopass)

@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
-</RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="enter seat no of passenger 1"
+        android:id="@+id/textView23"
+        />
+        <!--android:layout_alignParentStart="true"
+        -->
+
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/pass_seat_2_1"
+        android:inputType="number" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="enter seat no of passenger 1"
+        android:id="@+id/textView24"
+        />
+    <!--android:layout_alignParentStart="true"
+    -->
+
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/pass_seat_2_2"
+        android:inputType="number" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHECKIN"
+        android:id="@+id/onclickpass2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="340dp"
+        android:onClick="onclickpass2" />
+</LinearLayout>

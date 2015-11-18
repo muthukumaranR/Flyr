@@ -38,21 +38,23 @@ public class bookActivity extends Activity {
             passname2 = getIntent().getStringExtra("pass2");
         }
         Cursor cursor = udb.getFlightRow(id1);
-        fname = cursor.getString(0);
-        origin = cursor.getString(1);
-        dest = cursor.getString(2);
-        fare = cursor.getInt(3);
-        fares = ""+fare+"";
-        setContentView(R.layout.activity_booking);
+        if(cursor.getCount() >0) {
+            fname = cursor.getString(0);
+            origin = cursor.getString(1);
+            dest = cursor.getString(2);
+            fare = cursor.getInt(3);
+            fares = "" + fare + "";
+            setContentView(R.layout.activity_booking);
 
-        TextView fname_tv = (TextView)findViewById(R.id.textView18);
-        TextView origin_tv = (TextView)findViewById(R.id.textView19);
-        TextView dest_tv = (TextView)findViewById(R.id.textView20);
-        TextView fare_tv = (TextView)findViewById(R.id.textView21);
-        fname_tv.setText(fname);
-        origin_tv.setText(origin);
-        dest_tv.setText(dest);
-        fare_tv.setText(fares);
+            TextView fname_tv = (TextView) findViewById(R.id.textView18);
+            TextView origin_tv = (TextView) findViewById(R.id.textView19);
+            TextView dest_tv = (TextView) findViewById(R.id.textView20);
+            TextView fare_tv = (TextView) findViewById(R.id.textView21);
+            fname_tv.setText(fname);
+            origin_tv.setText(origin);
+            dest_tv.setText(dest);
+            fare_tv.setText(fares);
+        }
     }
 
     public void onBookingButtonClick(View v) {
@@ -93,7 +95,9 @@ public class bookActivity extends Activity {
             b.setUid(Integer.parseInt(uid));
             udb.insertPassenger(p2,b);
         }
+        Toast.makeText(bookActivity.this, "booked successfully!", Toast.LENGTH_LONG).show();
         Intent i = new Intent(bookActivity.this,MainActivity.class);
+        i.putExtra("username", udb.getUname(Integer.parseInt(uid)));
         startActivity(i);
 
 
