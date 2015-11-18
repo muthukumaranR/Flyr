@@ -46,10 +46,16 @@ public class bookActivity extends Activity {
         TextView origin_tv = (TextView) findViewById(R.id.textView19);
         TextView dest_tv = (TextView) findViewById(R.id.textView20);
         TextView fare_tv = (TextView) findViewById(R.id.textView21);
+        TextView seats_tv = (TextView) findViewById(R.id.availseats);
+        TextView date_tv= (TextView) findViewById(R.id.bookingdate);
         fname_tv.setText(fname);
         origin_tv.setText(origin);
         dest_tv.setText(dest);
         fare_tv.setText(fares);
+        int seats = udb.getSeats(id1,date);
+        String no_seats = ""+seats+"";
+        seats_tv.setText(no_seats);
+        date_tv.setText(date);
     }
 
     public void onBookingButtonClick(View v) {
@@ -68,7 +74,17 @@ public class bookActivity extends Activity {
             b.setUid(Integer.parseInt(uid));
             udb.insertPassenger(p, b);
             int fid= udb.getFlightId(bid+1);
-            udb.bookCancelTicket(fid, b.getD(), 1, 0, "book");
+            String fids=""+fid+"";
+            if(!udb.seatsAvailable(fids,b.getD(),1)) {
+                udb.bookCancelTicket(fid, b.getD(), 1, 0, "book");
+                Toast.makeText(getApplicationContext(),
+                        "Ticket Booked Successfully", Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(),
+                        "Seats not avaliable", Toast.LENGTH_LONG).show();
+            }
         }
         else {
             int bid=udb.getMaxBookId();
@@ -92,10 +108,18 @@ public class bookActivity extends Activity {
             b.setUid(Integer.parseInt(uid));
             udb.insertPassenger(p2, b);
             int fid= udb.getFlightId(bid+1);
-            udb.bookCancelTicket(fid, b.getD(), 2, 0, "book");
+            String fids=""+fid+"";
+            if(!udb.seatsAvailable(fids,b.getD(),2)) {
+                udb.bookCancelTicket(fid, b.getD(), 2, 0, "book");
+                Toast.makeText(getApplicationContext(),
+                        "Ticket Booked Successfully", Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(),
+                        "Seats not avaliable", Toast.LENGTH_LONG).show();
+            }
         }
-        Toast.makeText(getApplicationContext(),
-                "Ticket Booked Successfully", Toast.LENGTH_LONG).show();
         Intent i = new Intent(bookActivity.this,MainActivity.class);
         i.putExtra("username", udb.getUname(Integer.parseInt(uid)));
         startActivity(i);

@@ -10,21 +10,21 @@
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView25"
         android:text="Flight Details"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="203dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView28"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="34dp"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/textView28"
+        android:layout_alignStart="@+id/textView25" />
 
     <TextView
         android:id="@+id/textView25"
@@ -33,7 +33,7 @@
         android:layout_alignEnd="@+id/textView27"
         android:layout_below="@+id/textView18"
         android:layout_marginTop="31dp"
-        android:text="Origin"
+        android:text="Origin:"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textStyle="bold" />
 
@@ -62,7 +62,7 @@
         android:layout_alignStart="@+id/textView25"
         android:layout_below="@+id/textView19"
         android:layout_marginTop="31dp"
-        android:text="Destination"
+        android:text="Destination:"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textStyle="bold" />
 
@@ -71,12 +71,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView20"
         android:layout_marginStart="32dp"
         android:paddingTop="20dp"
-        android:text="Fare"
+        android:text="Fare:"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/textView20" />
 
     <TextView
         android:id="@+id/textView21"
@@ -88,19 +88,59 @@
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="No of Seats Available:"
+        android:id="@+id/textView22"
+        android:textStyle="bold"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/textView21"
+        android:layout_alignStart="@+id/availseats" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/availseats"
+        android:layout_below="@+id/textView22"
+        android:layout_alignStart="@+id/textView21" />
+
     <Button
         android:id="@+id/button4"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="100dp"
         android:background="#be505e"
         android:onClick="onBookingButtonClick"
         android:text="Book"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:layout_below="@+id/bookdate"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Booking Date:"
+        android:id="@+id/bookdate"
+        android:layout_below="@+id/availseats"
+        android:layout_alignStart="@+id/availseats"
+        android:layout_marginTop="45dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/bookingdate"
+        android:layout_below="@+id/bookdate"
+        android:layout_alignStart="@+id/bookdate" />
 
 </RelativeLayout>

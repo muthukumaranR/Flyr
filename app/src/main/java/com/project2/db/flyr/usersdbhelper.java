@@ -295,21 +295,52 @@ public class usersdbhelper extends SQLiteOpenHelper{
         return temp;
     }
 
-    public boolean seatsAvailable(String fid,Date d,int pass){
+    public int getSeats(String fid, String date)
+    {
         db = this.getReadableDatabase();
-        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
-        String datestr = sdf.format(d);
-    String query = "select remseats from seats where f_id ='"+fid+"' and fdate ='"+datestr+"'";
-        Cursor cr = db.rawQuery(query,null);
-        cr.moveToFirst();
-        int temp = cr.getInt(0);
-        cr.close();
-        if(pass>=temp){
-            return true;
+        Date fdate = null;
+        int temp = 0;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            fdate = format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        else{
-            return false;
+        String qry = "select remseats from " + seats_TABLE_NAME + " where f_id='" + fid + "'and fdate='" + fdate + "'";
+        Cursor cr = db.rawQuery(qry, null);
+        if (cr!=null && cr.getCount() > 0) {
+            cr.moveToFirst();
+            temp = cr.getInt(0);
+            cr.close();
+            db.close();
+            return temp;
         }
+        return temp;
+    }
+
+    public boolean seatsAvailable(String fid,String d,int pass) {
+        db = this.getReadableDatabase();
+        Date fdate = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            fdate = format.parse(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String qry = "select remseats from " + seats_TABLE_NAME + " where f_id='" + fid + "'and fdate='" + fdate + "'";
+        Cursor cr = db.rawQuery(qry, null);
+        if (cr!=null && cr.getCount() > 0) {
+            cr.moveToFirst();
+            int temp = cr.getInt(0);
+            cr.close();
+            db.close();
+            if (pass >= temp) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
 
